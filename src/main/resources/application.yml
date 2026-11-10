@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: wallet-ledger-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_db
+    username: wallet_user
+    password: wallet_password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: WalletHikariPool
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000        # 5 minutes
+      connection-timeout: 20000    # 20 seconds
+      max-lifetime: 1200000        # 20 minutes
+      leak-detection-threshold: 30000 # 30 seconds
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+
+server:
+  port: 8080
